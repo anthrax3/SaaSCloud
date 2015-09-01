@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="/Scripts/SaaSCloud/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/SaaSCloud/bootstrap-datepicker.zh-TW.js" charset="UTF-8"></script>
+    <script src="/Scripts/SaaSCloud/bootstrap.min.js"></script>
+    <script src="/Scripts/SaaSCloud/jquery.scrollUp.min.js"></script>
+    <link href="/Content/SaaSCloud/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/bootstrap-main.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/saas_buy.css" rel="stylesheet" media="screen" />
+
+    <title>訂單查詢</title>
+    
+    <style>
+	#custom_container{ width:1170px; max-width:90%;min-height: 370px !important;padding-top: 20px; text-align:center;overflow: hidden; padding-left:5%;}
+	#custom_container>div{ width:860px; max-width:100%; margin:auto;}
+	#custom_container .row-fluid{margin-top: 20px;}
+	#custom_container .row-fluid:first-child{margin-top: 0px;}
+	.row-fluid [class*="span"] {min-height: 10px;}
+	.row-fluid{display: table;table-layout: fixed;}
+	.row-fluid [class*="span"]{display: table-cell;vertical-align: middle;float: none;width: 16.666%;}
+	#history2 .row-fluid{padding: 10px 0; margin-top:0px;margin-bottom: 2px;border: 1px solid #e5e5e5;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+	.foot_btn{width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	.accordion-heading:hover{background-color: #e6e6e6; border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	table{text-align: left; max-width:860px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center; background:#eee;}
+	table td,table th{ border:1px solid #ccc; padding:5px;}
+	#history .span2,.his_th .span2{ width:20%;}
+	@@media (max-width: 767px) {
+		#custom_container{max-width: 100%; padding:0px;}
+		#custom_container .row-fluid{margin-top: 0px;}
+		#custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+		.accordion {word-break: break-all;}
+		.accordion-heading,#history2 .row-fluid{ padding:0 1%; width:98%;}
+		#custom_container>div{ width:auto;}
+		a.btn.foot_btn {margin-top: 15px;padding: 15px;}
+	}
+    </style>
+
+    <script>
+        function getOrderHistory() {
+            var url = '@Url.Action("GetOrderHistory", "History")';
+            //alert(url) ;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (data) {
+                    //alert(data.length);
+                    if (data) {
+                        $("#history").html(makeHtml(data));
+                        //setClickEvent();
+                    }
+                },
+                error: alertStatus
+            });
+
+        }
+
+        //function setClickEvent() {
+        //    $('.invalid_btn').click(function (event) {
+        //        alert("請等訂單狀態更新為已註銷後，再傳送新的訂單，謝謝");
+        //    });
+        //}
+
+        function cancelOrder(orderNo) {
+            var url = '@Url.Action("CancelOrder", "History")';
+            alert("orderNo: " + orderNo);
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {
+                    orderNo: orderNo
+                },
+                success: function (data) {
+                    //alert(data.length);
+                    if (data.Success) {
+                        $("#history").html(makeHtml(data));
+                        //setClickEvent();
+
+                        alert("請等訂單狀態更新為已註銷後，再傳送新的訂單，謝謝！");
+                    } else {
+                        alert("訂單註銷失敗！");
+                    }
+                },
+                error: alertStatus
+            });
+
+        }
+
+        function makeHtml(data) {
+            var htmlString = '';
+            for (var i = 0; i < data.length; i++) {
+                htmlString += '<div class="accordion-group">';
+                htmlString += '<div class="accordion-heading">';
+                htmlString += '<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#history" href="#collapse' + (i + 1) + '" style="padding: 10px 0;">';
+                htmlString += '<div class="row-fluid">';
+                htmlString += '<div class="span2">';
+                htmlString += data[i].OrderNo;
+                htmlString += '</div>';
+                htmlString += '<div class="span2">';
+                htmlString += data[i].OrderDateTime;
+                htmlString += '</div>';
+                htmlString += '<div class="span2">';
+                htmlString += data[i].ProductName;
+                htmlString += '</div>';
+                htmlString += '<div class="span2">';
+                htmlString += data[i].Price;
+                htmlString += '</div>';
+                htmlString += '<div class="span2">';
+                htmlString += data[i].Status;
+                htmlString += '</div>';
+                htmlString += '</div>';
+                htmlString += '</a>';
+                htmlString += '</div>';
+
+                if (data[i].InvoiceInfo) {
+                    //alert("data[i].InvoiceInfo");
+                    htmlString += '<div id="collapse' + (i + 1) + '" class="accordion-body collapse" style="height: 0px;">';
+                    htmlString += '<div class="accordion-inner">';
+                    htmlString += '<table style="width:100%" cellspacing="0" cellpadding="0" style="text-align:center;">';
+                    htmlString += '<tr>';
+                    htmlString += '<th scope="col">合約起始</th>';
+                    htmlString += '<th scope="col">合約年限</th>';
+                    htmlString += '<th scope="col">用戶號碼</th>';
+                    htmlString += '<th scope="col">費用項目</th>';
+                    htmlString += '<td rowspan="4" scope="col">';
+                    if (data[i].Status == '處理中') {
+                        htmlString += '<button class="btn invalid_btn" onclick="cancelOrder(\'' + data[i].OrderNo + '\');">註銷</button>';
+                    }
+                    htmlString += '</td>';
+                    htmlString += '</tr>';
+                    htmlString += '<tr>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.ContractStartDate + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.ContractValidYear + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.AccountId + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.FeeItem + '</td>';
+                    htmlString += '</tr>';
+                    htmlString += '<tr>';
+                    htmlString += '<th scope="col">合約迄日</th>';
+                    htmlString += '<th scope="col">門市名稱</th>';
+                    htmlString += '<th scope="col">聯絡人/電話</th>';
+                    htmlString += '<th scope="col">裝機地址</th>';
+                    htmlString += '</tr>';
+                    htmlString += '<tr>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.ContractEndDate + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.StoreName + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.Contact + '</td>';
+                    htmlString += '<td>' + data[i].InvoiceInfo.InstalledAddress + '</td>';
+                    htmlString += '</tr>';
+                    htmlString += '</table>';
+                    htmlString += '</div>';
+                    htmlString += '</div>';
+                } else if (data[i].CRMInfo) {
+                    //alert("data[i].CRMInfo");
+                    htmlString += '<div id="collapse' + (i + 1) + '" class="accordion-body collapse" style="height: 0px;">';
+                    htmlString += '<div class="accordion-inner">';
+                    htmlString += '<table style="width:100%" cellspacing="0" cellpadding="0" style="text-align:center;">';
+                    htmlString += '<tr>';
+                    htmlString += '<th scope="col">用戶號碼</th>';
+                    htmlString += '<th scope="col">費用項目</th>';
+                    htmlString += '<th scope="col">帳號數</th>';
+                    htmlString += '<th scope="col">空間大小</th>';
+                    htmlString += '<td rowspan="2" scope="col">';
+                    if (data[i].Status == '處理中') {
+                        htmlString += '<button class="btn invalid_btn" onclick="cancelOrder(\'' + data[i].OrderNo + '\');">註銷</button>';
+                    }
+                    htmlString += '</td>';
+                    htmlString += '</tr>';
+                    htmlString += '<tr>';
+                    htmlString += '<td>' + data[i].CRMInfo.AccountId + '</td>';
+                    htmlString += '<td>' + data[i].CRMInfo.FeeItem + '</td>';
+                    htmlString += '<td>' + data[i].CRMInfo.AccountNumber + '</td>';
+                    htmlString += '<td>' + data[i].CRMInfo.Size + '</td>';
+                    htmlString += '</tr>';
+                    htmlString += '</table>';
+                    htmlString += '</div>';
+                    htmlString += '</div>';
+                }
+                htmlString += '</div>';
+
+            }
+
+            //prompt("htmlString: ", htmlString);
+            return htmlString ;
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="custom_container">
+    <div>
+        <h1>
+        	訂單查詢
+		</h1>
+        <div style="margin:10px 0;">
+       	<strong>XXX</strong>您好！以下為您的訂單紀錄： </div>
+    </div>
+    <div class="his_th" style="padding:8px 0px; font-weight:bold;">
+        <div class="row-fluid">
+            <div class="span2">
+                訂單編號
+            </div>
+            <div class="span2">
+                訂購時間
+            </div>
+            <div class="span2">
+                商品名稱
+            </div>
+            <div class="span2">
+                金額
+            </div>
+            <div class="span2">
+                狀態
+            </div>
+        </div>
+    </div>
+    <div id="history" class="accordion">
+        <!--這樣是一筆資料-->
+        <!--這樣是一筆資料END-->
+    </div>
+    <div class="row-fluid">
+    	<div class="span12" style="padding-bottom:20px;">
+            <a class="btn foot_btn" href="#" onclick="goto('Index', 'Home');">回上頁</a>
+        </div>
+    </div>
+</div>
+<script>
+	$(document).ready(function(){ 
+		//$('.invalid_btn').click(function(event){
+		//	alert("請等訂單狀態更新為已註銷後，再傳送新的訂單，謝謝");
+		//});
+
+		getOrderHistory();
+	})
+</script>
+</body>
+</html>

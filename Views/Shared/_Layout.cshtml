@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title - SaaS雲裝置異動系統</title>
+    
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo/2014.1.415/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo/2014.1.415/kendoall")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+    function goto(actionName, ControllerName) {
+        var url = '/' + ControllerName + '/' + actionName;
+        //alert(url);
+        window.open(url, "_self");
+    }
+
+    function alertStatus(xhr, textStatus, errorThrown) {
+        if (xhr.status == "401") {
+            document.location.replace("@Url.Action("PermissionError","Common")");
+        } else if (xhr.status == "454") {
+            Clear();
+            alert("連線逾時");
+            document.location.replace("@Url.Action("LogOut","User")");
+        } else {
+            // 在IE 9中timeout，回應字串會因為編碼問題變成亂碼 (其餘瀏覽器正常)
+            // 且status不是正常的454變成500，所以只好做例外處理
+            // 把ie 9 && status=500的狀態顯示timeout訊息
+            if (xhr.status == "500" && $.browser.msie && $.browser.version == '9.0') {
+                Clear();
+                alert("連線逾時");
+                document.location.replace("@Url.Action("LogOut","User")");
+            }
+            else if (xhr.responseText) {
+                alert(xhr.responseText);
+            }
+        }
+    }
+    </script>
+
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+</body>
+</html>

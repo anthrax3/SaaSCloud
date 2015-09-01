@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/kendo/2014.1.415/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/font-awesome/css/font-awesome.css" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquerytmpl")
+    @Scripts.Render("~/bundles/jquerycookie")
+    @Scripts.Render("~/bundles/charisma")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo/2014.1.415/kendoall")
+    @Scripts.Render("~/Scripts/history.js/history")
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        
+    </div>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,110 @@
+﻿
+@model SaaSCloud.Models.CRMCheckModel
+@using SaaSCloud.Models
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="include/jquery-1.10.2.min.js"></script>
+    <script src="include/bootstrap-datepicker.js"></script>
+    <script src="include/bootstrap-datepicker.zh-TW.js" charset="UTF-8"></script>
+    <script src="include/bootstrap.min.js"></script>
+    <script src="include/jquery.scrollUp.min.js"></script>
+    <link href="include/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="include/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <link href="include/bootstrap-main.css" rel="stylesheet" media="screen">
+    <link href="saas_buy.css" rel="stylesheet" media="screen">
+<title>CRM@{@Model.prodName}產品-加購帳號需求</title>
+<style>
+	#custom_container{ width:1170px; max-width:100%;min-height: 370px !important;padding-top: 20px; text-align:center;}
+	#custom_container>div{ width:800px; max-width:100%; margin:auto;}
+	#custom_container .row-fluid{margin-top: 20px;}
+	#custom_container a.btn {width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	#custom_container a.btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	.slt_box{width:610px; max-width:90%;margin: auto;text-align: center;}
+	#foot.row-fluid [class*="span"]{ float:right;margin-right: 2.564102564102564%; margin-left:0px;}
+	#foot.row-fluid [class*="span"]:first-child{margin-right:0px;}
+	table{text-align: left; max-width:860px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center; background:#eee;}
+	table td,table th{ border:1px solid #ccc; padding:5px;}
+	@@media (max-width: 1200px) {
+		#foot.row-fluid [class*="span"] {margin-right: 2.1%;}
+	}
+	@@media (max-width: 767px) {
+		#custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+		#custom_container>div{ width:auto;}
+		#foot.row-fluid [class*="span"]{margin-right: 0%; margin-left:0px;}
+	}
+</style>
+</head>
+<body>
+<div id="custom_container">
+    <div>
+        <h1>
+        	CRM@{@Model.prodName}產品-加購帳號/儲存空間
+		</h1>
+        <div style="margin:10px 0;">
+        	<strong style="color:#f00;">請再次確認您所選擇的項目，確認無誤後請再點擊"加購確認"按鈕<br>註 : 一次只能送出一張新訂單，若欲修改訂單，請於訂單查詢點選"註銷"按鈕。</strong>
+		</div>
+        <form action="ConfirmPurchase" method="post" name="form1" style="margin: auto;max-width: 860px;">
+            <div class="row-fluid">
+                <div class="slt_box">
+                    <table cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th width="25%" scope="col">加購項目</th>
+                            <th width="25%" scope="col">費用</th>
+                            <th width="25%" scope="col">數量</th>
+                            <th width="25%" scope="col">小計</th>
+                        </tr>
+                        @{
+                            if (@Model.CRM_acct > 0) {
+                                <tr>
+                                    <td scope="row" align="center">CRM帳號</td>
+                                    <td align="center"><input id="crm_acct_price" name="crm_acct_price" value="@Model.crm_acct_price" style="display:none;" />@Model.crm_acct_price</td>
+                                    <td align="center">@Model.CRM_acct 個
+                                        <input type="hidden" name='accountNumber' value="@Model.CRM_acct" />
+                                    </td>
+                                    <td align="center"><input id="CRM_acct_total" name="CRM_acct_total" value="@Model.CRM_acct_total" style="display:none;" />@Model.CRM_acct_total</td>
+                                </tr>
+                            }
+                            if (@Model.CRM_space > 0) {
+                                <tr>
+                                    <td scope="row" align="center">儲存空間</td>
+                                    <td align="center"><input id="crm_space_price" name="crm_space_price" value="@Model.crm_space_price" style="display:none;" />@Model.crm_space_price</td>
+                                    <td align="center">@Model.CRM_space 個
+                                        <input type="hidden" name='spaceSize' value="@Model.CRM_space" />
+                                    </td>
+                                    <td align="center"><input id="CRM_space_total" name="CRM_space_total" value="@Model.CRM_space_total" style="display:none;" />@Model.CRM_space_total</td>
+                                </tr>
+                            }
+                        }
+                        <tr>
+                            <td scope="row" align="center">合計</td>
+                            <td align="center"></td>
+                            <td align="center"></td>
+                            <td align="center"><input id="crm_result_price" name="crm_result_price" value="@Model.crm_result_price" style="display:none;" />@Model.crm_result_price</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <input type="hidden" name='ProdName' value="@Model.prodName" />
+        </form>
+    </div>
+    <div id="foot" class="row-fluid" style="padding-bottom:20px;">
+		<div class="span6">
+            <a class="btn foot_btn" onclick="document.form1.submit();">
+                加購確認
+            </a>
+        </div>
+		<div class="span6">
+            @*<a href="crm_std.html" class="btn foot_btn">*@
+            <a href="javascript:window.history.back();" class="btn foot_btn">
+            	回上頁
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,602 @@
+﻿@using SaaSCloud.Common;
+@using SaaSCloud.Models;
+@using System.Collections.Generic;
+@{
+    SessionInfo session = new SessionInfo();
+    int count = 1;
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/Content/SaaSCloud/saas_buy.css" rel="stylesheet" media="screen" />
+    <title>電子發票產品-電子發票收銀機設備</title>
+    <style>
+	#custom_container{ width:1170px; max-width:100%;min-height: 370px !important;padding-top: 20px; text-align:center;}
+	#custom_container>div{ width:800px; max-width:100%; margin:auto;}
+	#custom_container .row-fluid{margin-top: 20px;}
+	.foot_btn{width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	table{text-align: left; max-width:860px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center;}
+	table td,table th{ border:1px solid #999; padding:5px;}
+	.img2{ display:none;}
+	#foot.row-fluid [class*="span"]{ float:right;}
+	#add_select th{background:#eee;}
+	/*#add_select td, #add_select th {border: 1px solid #ccc;}*/
+	.store>div{ border-bottom:0px; padding:1%;background:#fff;margin: 0 1%;}
+	.store>div:first-child{ margin-top:1%;}
+	.store>div:last-child{ margin-bottom:1%;}
+	.store>div>div{ display:inline; padding-right:1%;}
+	.store input{ margin:0; vertical-align:middle;vertical-align: middle;margin-bottom: 2px;margin-top:0px;}
+	@@media (max-width: 767px) {
+		table td{word-break: break-all;}
+		#custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+		#custom_container>div{ width:auto;}
+		.img1{ display:none;}
+		.img2{ display: block; text-align:center;}
+		.store>div>div{ display: block; padding-right:0;}
+		#add_select .store input[type=radio] {float: left;margin: 11% 1%;}
+	}
+    </style>
+    @{
+        string imageDir = "/Content/SaaSCloud/img";
+    }
+</head>
+<body>
+<div id="custom_container">
+    <div>
+        <h1>
+        	電子發票產品-電子發票收銀機設備
+		</h1>
+        <div style="margin:10px 0;">
+        	<strong>XXX</strong>您好！您可以從下方選單選擇欲購買的產品：
+		</div>
+    </div>
+	<form action="Invoice_chk" method="post" name="form1" style="margin: auto;max-width: 860px;">
+    <div style="padding:20px 0; font-weight:bold; font-size:16pt; text-align:left;">
+    	加購熱感紙
+	</div>
+    <table style="width:100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th align="center" scope="col">適用產品</th>
+            <th scope="col">型號</th>
+            <th scope="col">規格</th>
+            <th scope="col">單位(內含數量)</th>
+            <th scope="col">售價</th>
+            <th scope="col" align="center">數量</th>
+        </tr>
+        <tr>
+            <td rowspan="2" align="center">
+            	<a class="img1" href="@imageDir/p1_prod1.jpg" target="_blank"><img src="@imageDir/p1_prod1.jpg" /></a><br>電子發票收銀機CR6
+			</td>
+            <th scope="row">
+			    EC-P5780-50
+                <input type="hidden" name="prodType" id="prodType" value="熱感紙" />
+			    <input type="hidden" name="prodName" id="prodName" value="EC-P5780-50" />
+			</th>
+            <td rowspan="2" align="center">57 x 80 x 12 mm</td>
+		  <td align="center">1箱(內含50捲)</td>
+            <th>
+                2,300
+                <input type="hidden" name="prodPrice" id="prodPrice" value="2300" />
+			</th>
+            <td align="center">
+            	<select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+		  </td>
+        </tr>
+        <tr>
+            <th scope="row">
+			    EC-P5780-30
+                <input type="hidden" name="prodType" id="prodType" value="熱感紙" />
+			    <input type="hidden" name="prodName" id="prodName" value="EC-P5780-30" />
+			</th>
+            <td align="center">1箱(內含30捲)</td>
+          <th>
+		  1,500
+		  <input type="hidden" name="prodPrice" id="prodPrice" value="1500" />
+		  </th>
+            <td align="center">
+            	<select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+		  </td>
+        </tr>
+        <tr>
+            <td rowspan="2" align="center">
+            	<a class="img1" href="@imageDir/p1_prod3.png" target="_blank"><img src="@imageDir/p1_prod3.png" /></a><br>電子發票收銀機CRVX
+            </td>
+            <th scope="row">
+			    EC-P5750-96
+                <input type="hidden" name="prodType" id="prodType" value="熱感紙" />
+			    <input type="hidden" name="prodName" id="prodName" value="EC-P5750-96" />
+			</th>
+            <td rowspan="2" align="center">57 x 50 x 12 mm</td>
+          <td align="center">1箱(內含96捲)</td>
+            <th>
+			3,600
+			<input type="hidden" name="prodPrice" id="prodPrice" value="3600" />
+			</th>
+            <td align="center">
+            	<select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+		  </td>
+        </tr>
+        <tr>
+            <th scope="row">
+			    EC-P5750-50
+                <input type="hidden" name="prodType" id="prodType" value="熱感紙" />
+			    <input type="hidden" name="prodName" id="prodName" value="EC-P5750-50" />
+			</th>
+            <td align="center">1箱(內含50捲)</td>
+          <th>
+		  2,000
+		  <input type="hidden" name="prodPrice" id="prodPrice" value="2000" />
+		  </th>
+            <td align="center">
+            	<select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+		  </td>
+        </tr>
+        <!--
+        <tr>
+            <th colspan="5">需配送至離島</th>
+            <th><input type="checkbox" value="Y" id="Islands" name="Islands" /></th>
+        </tr>
+        -->
+    </table>
+    <div style="color:#f00;text-align:right;">※以上費用均為含稅，並含本島運費，離島運費每箱另外加收200元。</div>
+    <div style="padding:20px 0; font-weight:bold; font-size:16pt; text-align:left;">
+    	保固期限及保固條件說明
+	</div>
+    <div>
+    	<ul style="text-align:left;">
+        	<li>
+    			電子發票收銀機設備組均享有兩年保固
+            </li>
+        	<li>
+    			設備於保固期內無法修復時，本公司得提供良品更換
+            </li>
+        	<li>
+    			過保固期後依原廠報價修復，若設備已無法修復，客戶須另建置
+            </li>
+        	<li>
+    			主機螢幕、鋰電池及熱感印表頭為耗材，保固6個月
+            </li>
+        	<li>
+    			因人為損壞維修費用另計
+            </li>
+		</ul>
+    </div>
+    <div style="padding:20px 0; font-weight:bold; font-size:16pt; text-align:left;">
+    	加購設備組合
+	</div>
+    <table style="width:100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th colspan="2" scope="col">設備名稱</th>
+            <th scope="col">規格說明(寬長高)</th>
+            <th scope="col">售價</th>
+            <th scope="col" align="center">數量</th>
+        </tr>
+        <tr>
+            <th rowspan="2">
+				CR6組合
+                <input type="hidden" name="prodType" id="prodType" value="設備組合" />
+				<input type="hidden" name="prodName" id="prodName" value="CR6組合" />					
+			</th>
+            <td align="center">
+            	<a class="img1" href="@imageDir/p1_prod1.jpg" target="_blank"><img src="@imageDir/p1_prod1.jpg" /></a><br>
+                收銀機主機<br>
+                （含錢櫃）</td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod1.jpg" target="_blank"><img src="@imageDir/p1_prod1.jpg" /></a>
+                型號：CR6<br>
+                尺寸：430*320*163mm<br>
+                (耗材需自行購買)<br>
+                設備提供2年保固<br>
+                (主機螢幕及熱感印表頭等耗材保固6個月)
+            </td>
+            <th rowspan="2">
+				16,800
+				<input type="hidden" name="prodPrice" id="prodPrice" value="16800" />
+			</th>
+            <td rowspan="2" align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select></td>
+        </tr>
+        <tr>
+            <td align="center">
+            	<a class="img1" href="@imageDir/p1_prod2.jpg" target="_blank"><img src="@imageDir/p1_prod2.png" /></a><br>
+                條碼掃描器
+			</td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod2.jpg" target="_blank"><img src="@imageDir/p1_prod2.png" /></a>
+                型號：BBTWX<br>
+                手握式掃描器<br>
+                設備提供2年保固
+            </td>
+        </tr>
+        <tr>
+            <th rowspan="2">CRVX組合</th>
+            <td align="center">
+           	  <a class="img1" href="@imageDir/p1_prod3.png" target="_blank"><img src="@imageDir/p1_prod3.png" /></a><br>
+                收銀機主機
+                <input type="hidden" name="prodType" id="prodType" value="設備組合" />
+				<input type="hidden" name="prodName" id="prodName" value="CRVX組合" />
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod3.png" target="_blank"><img src="@imageDir/p1_prod3.png" /></a>
+                型號：CRVX<br>
+                尺寸：107*223*79mm<br>
+                (耗材需自行購買)<br>
+                設備提供2年保固<br>
+                (主機螢幕、鋰電池及熱感印表頭等耗材保固6個月)
+            </td>
+            <th rowspan="2">
+                10,500
+              <input type="hidden" name="prodPrice" id="prodPrice" value="10500" />
+			</th>
+            <td rowspan="2" align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select></td>
+        </tr>
+        <tr>
+            <td align="center">
+           	  <a class="img1" href="@imageDir/p1_prod2.png" target="_blank"><img src="@imageDir/p1_prod2.png" /></a><br>
+                條碼掃描器
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod2.png" target="_blank"><img src="@imageDir/p1_prod2.png" /></a>
+                型號：BBTWX<br>
+                手握式掃描器<br>
+                設備提供2年保固
+            </td>
+        </tr>
+    </table>
+    <div style="padding:20px 0; font-weight:bold; font-size:16pt; text-align:left;">
+    	加購備品機
+	</div>
+	<table style="width:100%" cellspacing="0" cellpadding="0">
+        <tr>
+            <th scope="col">設備名稱</th>
+            <th scope="col">規格說明(寬長高)</th>
+            <th scope="col">售價</th>
+            <th scope="col" align="center">數量</th>
+        </tr>
+        <tr>
+            <td align="center">
+            	<a class="img1" href="@imageDir/p1_prod1.jpg" target="_blank"><img src="@imageDir/p1_prod1.jpg" /></a><br>
+                收銀機主機<br>
+                （含錢櫃）
+                <input type="hidden" name="prodType" id="prodType" value="備品機" />
+				<input type="hidden" name="prodName" id="prodName" value="CR6" />
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod1.jpg" target="_blank"><img src="@imageDir/p1_prod1.jpg" /></a>
+                型號：CR6<br>
+                尺寸：430*320*163mm<br>
+                (耗材需自行購買)<br>
+                設備提供2年保固<br>
+                (主機螢幕及熱感印表頭等耗材保固6個月)
+            </td>
+            <th>
+				10,400
+			  <input type="hidden" name="prodPrice" id="prodPrice" value="10400" />
+			</th>
+            <td align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+           	  <a class="img1" href="@imageDir/p1_prod3.png" target="_blank"><img src="@imageDir/p1_prod3.png" /></a><br>
+                收銀機主機
+                <input type="hidden" name="prodType" id="prodType" value="備品機" />
+				<input type="hidden" name="prodName" id="prodName" value="CRVX" />
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod3.png" target="_blank"><img src="@imageDir/p1_prod3.png" /></a>
+                型號：CRVX<br>
+                尺寸：107*223*79mm<br>
+                (耗材需自行購買)<br>
+                設備提供2年保固<br>
+                (主機螢幕、鋰電池及熱感印表頭等耗材保固6個月)
+            </td>
+            <th>
+			8,000
+			  <input type="hidden" name="prodPrice" id="prodPrice" value="8000" />
+			</th>
+            <td align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+       		  <a class="img1" href="@imageDir/p1_prod2.png" target="_blank"><img src="@imageDir/p1_prod2.png" /></a><br>
+                條碼掃描器
+                <input type="hidden" name="prodType" id="prodType" value="備品機" />
+				<input type="hidden" name="prodName" id="prodName" value="BBTWX" />
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod2.png" target="_blank"><img src="@imageDir/p1_prod2.png" /></a>
+                型號：BBTWX<br>
+                手握式掃描器<br>
+                設備提供2年保固
+            </td>
+            <th>
+			3,000
+			  <input type="hidden" name="prodPrice" id="prodPrice" value="3000" />
+			</th>
+            <td align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+              </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+				<a class="img1" href="@imageDir/p1_prod4.jpg" target="_blank"><img src="@imageDir/p1_prod4.jpg " /></a><br>
+                錢櫃(CRVX選購)
+                <input type="hidden" name="prodType" id="prodType" value="備品機" />
+				<input type="hidden" name="prodName" id="prodName" value="ACWYCWV0-103A" />
+            </td>
+            <td>
+            	<a class="img2" href="@imageDir/p1_prod4.jpg" target="_blank"><img src="@imageDir/p1_prod4.jpg " /></a>
+                型號：ACWYCWV0-103A<br>
+                尺寸：335mm*368mm*80mm<br>
+                傳輸介面：12V,24V for RJ11<br>
+                設備提供2年保固
+            </td>
+            <th>
+                1,900
+                <input type="hidden" name="prodPrice" id="prodPrice" value="1900" />
+			</th>
+            <td align="center">
+                <select name="qty" id="qty" style="width:60px; vertical-align:middle; margin:0px;">
+                    <option>0</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+            	</select>
+			</td>
+        </tr>
+    </table>
+    <div style="color:#f00;text-align:right;">※僅含加購備品機，若需安裝，請洽業務經理</div>
+    <div style="padding:20px 0; font-weight:bold; font-size:16pt; text-align:left;">
+    	選擇門市名稱/收件地址
+	</div>
+    <table id="add_select" style="width:100%" cellspacing="0" cellpadding="0">
+        <tr>
+        	<th>
+            	<div style="text-align:left;">
+                    <b>用戶號碼(帳記名稱/帳寄地址)</b>
+                </div>
+            </th>
+        </tr>
+        @foreach (PostInfoModel postInfo in session.SaaSCloudInfo.postInfoList) {
+            if (postInfo.ProdName == "P1") {
+                foreach (CompanyInfoModel companyInfo in postInfo.CompanyInfoList) {
+                    <tr>
+                        <td>
+                            <!--這樣是一個號碼-->
+                            <div style="text-align:left;font-weight: bold;">
+                                <a name="mem_id" id="mem_id_@count" data-toggle="collapse" data-target="#mem_add_@count" style="cursor:pointer;">
+                                    ▼@postInfo.ENNumber (@companyInfo.CompanyName/@companyInfo.CompanyAddress)
+                                </a>
+                            </div>
+                            @if (@companyInfo.PendingOrder) {
+                                <div id="mem_add_@count" class="store collapse" style="">
+                                    <div>
+                                        <!--錯誤訊息-->
+                                        <span style="color:#f00;">有其他訂單尚未完成，無法加購新訂單，請洽專案經理或0800-080-365客服洽詢，謝謝!</span>
+                                        <!--錯誤訊息END-->
+                                    </div>
+                                </div>
+                                count++;
+                            } else {
+                                <div id="mem_add_@count" class="store collapse" style="">
+                                    @foreach (StoreInfoModel storeInfo in companyInfo.StoreInfoList) {
+                                        <div>
+                                            <!--這樣是一間門市-->
+                                            <table style="width:100%" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                    <td rowspan="3" align="center" valign="middle" scope="col">
+                                                        <input type="radio" name="store" value="@count" />
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            門市名稱：@storeInfo.StoreName (@storeInfo.StoreAddress)
+                                                            <input type="hidden" value="@storeInfo.StoreName" name="shopname_@count" id="shopname_@count" />
+                                                            <input type="hidden" value="@storeInfo.StoreAddress" name="addr_@count" id="addr_@count" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            聯絡人：<input type="text" value="@storeInfo.Contacts" id="contactname_@count" name="contactname_@count" style="width: 18%;min-width: 100px;" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div>
+                                                            聯絡人電話：<input type="text" value="@storeInfo.ContactsTel" id="contacttel_@count" name="contacttel_@count" style="width: 18%;min-width: 100px;" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <!--這樣是一間門市END-->
+                                        </div>
+                                        count++;
+                                    }
+                                </div>
+                            }
+                            <!--這樣是一個號碼END-->
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </table>
+    <input type="hidden" value="P1" name="mainProdName" />
+	<input type="hidden" value="" name="shopname" />
+	<input type="hidden" value="" name="addr" />
+	<input type="hidden" value="" name="contactname" />
+	<input type="hidden" value="" name="contacttel" />
+	</form>
+    <div id="foot" class="row-fluid" style="padding-bottom:20px;">
+		<div class="span6">
+            <a class="btn foot_btn" onclick="check();">
+                我要購買
+            </a>
+        </div>
+		<div class="span6">
+            @*<a href="#" onclick="goto('Invoice', 'Home');" class="btn foot_btn">*@
+            <a href="javascript:window.history.back();" class="btn foot_btn">
+                回上頁
+            </a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function check() {
+        var num = 0;
+
+        $("select[name='qty']").each(function () {
+            num += parseInt($(this).val());
+        });
+
+        if ($('input[name=store]:checked').val() == null) {
+            alert("請選擇門市名稱/收件地址");
+        } else {
+            var i = $('input[name=store]:checked').val();
+            $('input[name=shopname]').val($('input[name=shopname_' + i + ']').val());
+            $('input[name=addr]').val($('input[name=addr_' + i + ']').val());
+            $('input[name=contactname]').val($('input[name=contactname_' + i + ']').val());
+            $('input[name=contacttel]').val($('input[name=contacttel_' + i + ']').val());
+
+            if ($('input[name=contactname]').val() == "" || $('input[name=contacttel]').val() == "") {
+                alert("請填寫聯絡人資料");
+            } else {
+                if (num == 0) {
+                    alert("您尚未加購任何商品");
+                } else {
+                    document.form1.submit();
+                }
+            }
+        }
+    }
+</script>
+</body>
+</html>

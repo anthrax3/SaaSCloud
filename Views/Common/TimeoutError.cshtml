@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>登入逾時</title>
+    <style type="text/css">
+        span.link {
+            text-decoration: underline;
+            color: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        //alert("您尚未登入，或您的操作已逾時，請重新登入");
+        if (self.frameElement != null && self.frameElement.tagName == "IFRAME") {
+            parent.document.location.replace("@Url.Action("LogOut", "User")");
+        } else {
+            document.location.replace("@Url.Action("LogOut", "User")");
+        }
+    </script>
+</body>
+</html>
+

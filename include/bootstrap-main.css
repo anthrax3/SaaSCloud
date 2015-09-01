@@ -1,0 +1,225 @@
+/* CUSTOMIZE THE NAVBAR -------------------------------------------------- */
+    /* Special class on .container surrounding .navbar, used for positioning it into place. */
+    .navbar-wrapper {
+		position:relative;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		margin-top: 20px;
+		margin-bottom: -90px; /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
+    }
+    /* Remove border and change up box shadow for more contrast */
+    .navbar .navbar-inner {
+		border: 0;
+			-webkit-box-shadow: 0 2px 10px rgba(255,255,255,.25);
+				-moz-box-shadow: 0 2px 10px rgba(255,255,255,.25);
+					box-shadow: 0 2px 10px rgba(255,255,255,.25);
+		background-color:#FFFFFF;
+    }
+	.navbar-inverse .navbar-inner{
+		background-image:none;
+		background-color:transparent;
+		filter:none;
+	}
+	.navbar .navbar-inner{
+		webkit-box-shadow:none;
+		box-shadow:none;
+	}
+    /* Downsize the brand/project name a bit */
+    .navbar .brand {
+      padding: 14px 20px 16px; /* Increase vertical padding to match navbar links */
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 0 -1px 0 rgba(255,255,255,.5);
+	  background-image:none;
+	  background-color:#FFFFFF;
+    }
+
+    /* Navbar links: increase padding for taller navbar */
+	.navbar .navbar-inverse .navbar-fixed-top .navbar-inner,.navbar-inverse .nav-collapse .nav > li > a:focus{
+		background-image:none;
+		background-color:#FFFFFF;
+	}
+    .navbar .nav > li > a {
+		padding: 10px 0px;
+		text-shadow:none;
+    }
+    /* Offset the responsive button for proper vertical alignment */
+    .navbar .btn-navbar {
+		margin-top: 10px;
+    }
+	
+	.navbar-inverse .btn-navbar{
+		background-image:none;
+		background-color:#EC6D81;
+	}
+	
+	
+	.navbar-inverse .btn-navbar:hover, .navbar-inverse .btn-navbar:focus, .navbar-inverse .btn-navbar:active, .navbar-inverse .active.btn-navbar, .navbar-inverse .disabled.btn-navbar, .navbar-inverse [disabled].btn-navbar{
+		background-image:none;
+		background-color:#EC6D81;
+	}
+	
+	.row1{
+		margin-top:80px;
+	}
+    /* RESPONSIVE CSS
+    -------------------------------------------------- */
+	.container {
+		margin-right: auto;
+		margin-left: auto;
+		background-image:none;
+		background-color:inherit;
+	}
+	.navbar-inner .container{
+		padding-top:30px;	
+	}
+	.banner{
+		margin-top:-50px;
+		padding-top:52px;
+		padding-bottom:20px;
+	}
+	.adLink{
+		padding-top:191px;
+		padding-bottom:33px;
+	}
+	.message{
+		height:207px;
+		padding-top:64px;
+		margin:0px;
+	}
+	.messageBox{
+		height:160px;
+	}
+	.theNews{
+		color:#333333;
+		margin-left:35px;
+	}
+	.container .brand{
+		margin-left:24px;
+	}
+	.moreBtn{
+		margin-left:247px;
+	}
+	.titleColor{
+		color:#727171;
+	}
+	.priceColor{
+		color:#EC6D81;
+	}
+	.buttonSet{
+		margin-top:-20px;
+		padding-top:45px;
+		padding-bottom:20px;
+	}
+	/*left menu*/
+	.pull-right .dropdown-menu {
+		left: auto;
+		right: 0;
+	}
+	
+	
+	.nav li.dropdown ul.dropdown-menu li:hover ul {
+		display:block;
+		position:absolute;
+		left: 100%;
+		-webkit-border-radius: 3px;
+		   -moz-border-radius: 3px;
+				border-radius: 3px;
+	}
+	#pmenu .dropdown-menu,#left_menu .dropdown-menu{
+		top:0\9;
+	}
+	.nav li.dropdown ul.dropdown-menu ul {
+		display: none;
+		float:right;
+		position: relative;
+		top: auto;
+		margin-top: -30px;
+	}
+	
+	.cockerDashed{height:39px; background-image:url(/images/line_down.gif);}
+	.row-fluid .cockerLine{height:11px; min-height:11px; background-image:url(/images/line.gif);}
+	.tableLeftTitle{text-align:right; line-height:30px;}
+	.tableRightMemo{text-align:left; padding-left:15px; line-height:30px;}
+	.disableText{width:15%; background-color:#eeeeee;}
+	.tableLeftTitle{font-weight:bold}
+	#headBox a[href="javascript:void(0)"],#left a[href="javascript:void(0)"]{cursor:default;}
+	@media (max-width: 1200px) and (min-width: 979px){
+		.navbar-fixed-top  .container{
+			width:990px;
+		}
+	}
+	@media (max-width: 1024px) {
+		.container .brand{
+			margin-left:-4px;
+		}
+	}
+
+    @media (max-width: 979px) {
+		.navbar .navbar-inverse .navbar-fixed-top .navbar-inner,.navbar-inverse .nav-collapse .nav > li > a:focus,.navbar-inverse .nav-collapse .nav>li>a:hover{
+			background-image:none;
+			background-color:#FFFFFF;
+		}
+		
+      .container.navbar-wrapper {
+        margin-bottom: 0;
+        width: auto;
+      }
+      .navbar-inner {
+        border-radius: 0;
+        margin: -20px 0;
+      }
+	  	.container{
+			margin-top:20px;
+		}
+	  	.banner{
+			margin-top:0px;
+			padding-bottom:0px;
+		}
+	  	.row1{
+			margin-top:0px;
+		}
+		.moreBtn{
+			margin-left:70%;
+		}
+    }
+
+    @media (max-width: 767px) {
+
+		.navbar-inner {
+			margin-top: -20px;
+		}
+		
+		.navbar-fixed-top{
+			margin-right:0px;
+		}
+		.banner{
+			margin-top:-10px;
+			padding-bottom:0px;
+		}
+		.row1{
+			margin-top:0px;
+		}
+		.container .brand{
+			margin-left:0px;
+		}
+		.navbar-inverse .nav-collapse .nav>li>a:hover{
+			background-image:none;
+			background-color:#FFFFFF;
+		}
+		.messageBox{
+			height:auto;
+		}
+		.message{
+			height:auto;
+		}
+		.moreBtn{
+			margin-top:20px;
+			margin-left:70%;
+		}
+		.tableLeftTitle{text-align:left;}
+		.tableRightMemo{text-align:left; padding-left:0px;}
+		[class*="shop_tb"],[id*="TableRow"]{padding-left:10px;}
+    }

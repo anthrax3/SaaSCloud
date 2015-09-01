@@ -1,0 +1,62 @@
+﻿@using SaaSCloud.Common;
+@{
+    SessionInfo session = new SessionInfo();
+}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/Content/SaaSCloud/saas_buy.css" rel="stylesheet" media="screen" />
+<title>電子發票產品-加購硬體</title>
+
+<style>
+	.foot_btn{width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	#custom_container{ width:1170px; max-width:100%;min-height: 370px !important;padding-top: 20px; text-align:center;}
+	#custom_container>div{ width:800px; max-width:100%; margin:auto;}
+	#custom_container .row-fluid{margin-top: 20px;}
+	#custom_container a.btn {width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	#custom_container a.btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	@@media (max-width: 767px) {
+		#custom_container .row-fluid{margin-top: 0px;}
+		#custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+		#custom_container>div{ width:auto;}
+	}
+</style>
+</head>
+<body>
+<div id="custom_container">
+    <div>
+        <h1>
+        	電子發票產品-加購硬體
+        </h1>
+        <div style="margin:10px 0;">
+        	<strong>XXX</strong>您好！您可以從下方選單選擇欲購買的產品：
+		</div>
+        <div class="row-fluid">
+        	<div class="span6">
+                @if (session.SaaSCloudInfo.mainProdPurchaseInfo.PurchaseInvoiceP1) {
+            	<a class="btn" href="#" onclick="goto('P1', 'Invoice');">
+                	電子發票收銀機設備
+                </a>
+                }
+            </div>
+        	<div class="span6">
+                @if (session.SaaSCloudInfo.mainProdPurchaseInfo.PurchaseInvoiceP5) {
+                <a class="btn" href="#" onclick="goto('P5', 'Invoice');">
+                    電子發票轉換盒設備
+                </a>
+                }
+            </div>
+        </div>
+        <div class="row-fluid">
+        	<div class="span12" style="padding-bottom:20px;">
+                <a href="#" onclick="goto('Index', 'Home');" class="btn foot_btn">回上頁</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

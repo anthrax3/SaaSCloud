@@ -1,0 +1,259 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+@using SaaSCloud.Models;
+@Scripts.Render("~/Scripts/kendoGridCommonJS.js")
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <link href="/Content/SaaSCloud/saas_buy.css" rel="stylesheet" media="screen" />
+
+<title>訂單查詢</title>
+
+<style>
+	#custom_container{ width:1170px; max-width:90%;min-height: 370px !important;padding-top: 20px; text-align:center;overflow: hidden; padding-left:5%;}
+	#custom_container>div{ width:860px; max-width:100%; margin:auto;}
+	#custom_container .row-fluid{margin-top: 20px;}
+	#custom_container .row-fluid:first-child{margin-top: 0px;}
+	.row-fluid [class*="span"] {min-height: 10px;}
+	.row-fluid{display: table;table-layout: fixed;}
+	.row-fluid [class*="span"]{display: table-cell;vertical-align: middle;float: none;width: 16.666%;}
+	#history2 .row-fluid{padding: 10px 0; margin-top:0px;margin-bottom: 2px;border: 1px solid #e5e5e5;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
+	.foot_btn{width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	.accordion-heading:hover{background-color: #e6e6e6; border-color: #adadad;}
+	.foot_btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+	table{text-align: left; max-width:860px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center; background:#eee;}
+	table td,table th{ border:1px solid #ccc; padding:5px;}
+	#history .span2,.his_th .span2{ width:20%;}
+	@@media (max-width: 767px) {
+		#custom_container{max-width: 100%; padding:0px;}
+		#custom_container .row-fluid{margin-top: 0px;}
+		#custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+		.accordion {word-break: break-all;}
+		.accordion-heading,#history2 .row-fluid{ padding:0 1%; width:98%;}
+		#custom_container>div{ width:auto;}
+		a.btn.foot_btn {margin-top: 15px;padding: 15px;}
+	}
+</style>
+
+<script type="text/javascript">
+    function gotoIndex() {
+        var url = '@Url.Action("Index", "Home")';
+        window.open(url, "_self");
+    }
+</script>
+
+</head>
+<body>
+<div id="custom_container">
+    <div>
+        <h1>
+        	訂單查詢
+		</h1>
+        <div style="margin:10px 0;"><strong>XXX</strong>您好！以下為您的訂單紀錄： </div>
+    </div>
+    <div class="his_th" style="padding:8px 0px; font-weight:bold;">
+        <div class="row-fluid">
+            <div class="span2">
+                訂單編號
+            </div>
+            <div class="span2">
+                訂購時間
+            </div>
+            <div class="span2">
+                商品名稱
+            </div>
+            <div class="span2">
+                金額
+            </div>
+            <div class="span2">
+                狀態
+            </div>
+        </div>
+    </div>
+    <div id="history" class="accordion">
+        <!--這樣是一筆資料-->
+        <div class="accordion-group">
+            <div class="accordion-heading">
+            	<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#history" href="#collapse1" style="padding: 10px 0;">
+                    <div class="row-fluid">
+                        <div class="span2">
+                                000000239
+                        </div>
+                        <div class="span2">
+                        	2015/6/11 下午 05:55:00
+                        </div>
+                        <div class="span2">
+                        	雲端電子發票
+                        </div>
+                        <div class="span2">
+                        	11,500
+                        </div>
+                        <div class="span2">
+                            處理中
+                        </div>
+                    </div>
+            	</a>
+            </div>
+            <div id="collapse1" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <table cellspacing="0" cellpadding="0" style="width: 100%;text-align:center;">
+                        <tr>
+                            <th scope="col">合約起始</th>
+                            <th scope="col">合約年限</th>
+                            <th scope="col">用戶號碼</th>
+                            <th scope="col">費用項目</th>
+                            <td rowspan="4" scope="col"><button class="btn invalid_btn">註銷</button></td>
+                        </tr>
+                        <tr>
+                            <td>2015/06/17</td>
+                            <td>兩年</td>
+                            <td>EN09000001</td>
+                            <td>月租</td>
+                        </tr>
+                        <tr>
+                          <th scope="col">合約迄日</th>
+                          <th scope="col">門市名稱</th>
+                            <th scope="col">聯絡人/電話</th>
+                            <th scope="col">裝機地址</th>
+                        </tr>
+                        <tr>
+                          <td>2017/06/17</td>
+                          <td>XXX中和店</td>
+                            <td>王先生<br>0987654321</td>
+                            <td>台北市文山區XX路XX街X樓X號-X</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--這樣是一筆資料END-->
+        <!--這樣是一筆資料-->
+        <div class="accordion-group">
+            <div class="accordion-heading">
+            	<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#history" href="#collapse4" style="padding: 10px 0;">
+                    <div class="row-fluid">
+                        <div class="span2">
+                        	000000239
+                        </div>
+                        <div class="span2">
+                        	2015/6/11 下午 05:55:00
+                        </div>
+                        <div class="span2">
+                        	CRM行銷高手
+                        </div>
+                        <div class="span2">
+                        	11,500
+                        </div>
+                        <div class="span2">
+                            處理中
+                        </div>
+                    </div>
+            	</a>
+            </div>
+            <div id="collapse4" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <table cellspacing="0" cellpadding="0" style="width: 100%;text-align:center;">
+                        <tr>
+                            <th scope="col">用戶號碼</th>
+                            <th scope="col">費用項目</th>
+                            <th scope="col">帳號數</th>
+                            <th scope="col">空間大小</th>
+                            <td rowspan="2" scope="col"><button class="btn invalid_btn">註銷</button></td>
+                        </tr>
+                        <tr>
+                            <td>EN09000001</td>
+                            <td>月租</td>
+                            <td>2</td>
+                            <td>3GB</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--這樣是一筆資料END-->
+        <!--這樣是一筆資料-->
+        <div class="accordion-group">
+            <div class="accordion-heading">
+            	<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#history" href="#collapse" style="padding: 10px 0;">
+                    <div class="row-fluid">
+                        <div class="span2">
+                        	000000239
+                        </div>
+                        <div class="span2">
+                        	2015/6/11 下午 05:55:00
+                        </div>
+                        <div class="span2">
+                        	CRM豪華版</div>
+                        <div class="span2">
+                        	11,500
+                        </div>
+                        <div class="span2">
+                            處理中
+                        </div>
+                    </div>
+            	</a>
+            </div>
+            <div id="collapse" class="accordion-body collapse" style="height: 0px;">
+                <div class="accordion-inner">
+                    <table cellspacing="0" cellpadding="0" style="width: 100%;text-align:center;">
+                        <tr>
+                            <th scope="col">用戶號碼</th>
+                            <th scope="col">費用項目</th>
+                            <th scope="col">帳號數</th>
+                            <th scope="col">空間大小</th>
+                            <td rowspan="2" scope="col"><button class="btn invalid_btn">註銷</button></td>
+                        </tr>
+                        <tr>
+                            <td>EN09000001</td>
+                            <td>月租</td>
+                            <td>2</td>
+                            <td>3GB</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--這樣是一筆資料END-->
+    </div>
+
+            <div class="box-content">
+                @(Html.Kendo().Grid<OrderHistoryModel>()
+                .Name("MyGrid")
+                .Columns(columns =>
+                {
+                    columns.Bound(p => p.OrderNo).Width(150);
+                    columns.Bound(p => p.OrderDateTime).Width(110).Format("{0:yyyy-MM-dd HH:mm:ss}").IncludeInMenu(true);
+                    columns.Bound(p => p.ProductName).Width(150);
+                    columns.Bound(p => p.Price).Width(120);
+                    columns.Bound(p => p.Status).Width(150);
+                })
+                .Resizable(resize => resize.Columns(true))
+                .Reorderable(reorder => reorder.Columns(true))
+                .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Read(read => read.Action("GetOrderHistory", "Home"))
+                )
+                )
+            </div><!--div.box-content-->
+
+    <div class="row-fluid">
+    	<div class="span12" style="padding-bottom:20px;">
+            <a class="btn foot_btn" href="#" onclick="gotoIndex() ;">回上頁</a>
+        </div>
+    </div>
+</div>
+
+<script>
+	$(document).ready(function(){ 
+		$('.invalid_btn').click(function(event){
+			alert("請等訂單狀態更新為已註銷後，再傳送新的訂單，謝謝");
+		});
+	})
+</script>
+</body>
+</html>

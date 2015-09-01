@@ -1,0 +1,132 @@
+﻿
+@model SaaSCloud.Models.InvoicePurchaseModel
+@using SaaSCloud.Models
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=edge, chrome=1">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/Scripts/SaaSCloud/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/SaaSCloud/bootstrap-datepicker.zh-TW.js" charset="UTF-8"></script>
+    <script src="/Scripts/SaaSCloud/bootstrap.min.js"></script>
+    <script src="/Scripts/SaaSCloud/jquery.scrollUp.min.js"></script>
+    <link href="/Content/SaaSCloud/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/bootstrap-main.css" rel="stylesheet" media="screen" />
+    <link href="/Content/SaaSCloud/saas_buy.css" rel="stylesheet" media="screen" />
+    <title>電子發票產品-購買確認</title>
+
+<style>
+    #custom_container{ width:1170px; max-width:100%;min-height: 370px !important;padding-top: 20px; text-align:center;}
+    #custom_container>div{ width:800px; max-width:100%; margin:auto;}
+    #custom_container .row-fluid{margin-top: 20px;}
+    #custom_container a.btn {width: 100%;padding: 15px 0px;display: block;max-width: 200px;margin: auto;font-size: 12pt;color: #333;background: #fff;border-color: #adadad;}
+    #custom_container a.btn:hover{background-color: #e6e6e6;border-color: #adadad;}
+    .slt_box{width: 220px;margin: auto;text-align: center;}
+	table{text-align: left; max-width:800px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center;}
+	table td,table th{ border:1px solid #999; padding:5px;}
+    #foot.row-fluid [class*="span"]{ float:right;}
+	table{text-align: left; max-width:860px; width:100%;margin: auto;}
+	table th{ font-weight:bold; text-align:center; background:#eee;}
+	table td,table th{ border:1px solid #ccc; padding:5px;}
+	#detail>tbody>tr>td,#detail>tbody>tr>th{ border-bottom:0px;border-top: 0;}
+	#detail>tbody>tr:first-child>td,#detail>tbody>tr:first-child>th{ border-top:1px solid #ccc;}
+	#detail>tbody>tr:last-child>td,#detail>tbody>tr:last-child>th{ border-bottom:1px solid #ccc;}
+    @@media (max-width: 767px) {
+        #custom_container .row-fluid [class*="span"]{ margin-bottom:10px;}
+        #custom_container>div{ width:auto;}
+    }
+</style>
+</head>
+<body>
+<div id="custom_container">
+	<div>
+        <h1>
+        	電子發票產品-購買確認
+		</h1>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <strong style="color:#F00;">以下為您選購的商品及聯絡人資訊，確認無誤後請點擊"確認購買"按鈕<br>註 : 一次只能送出一張新訂單，若欲修改訂單，請於訂單查詢點選"註銷"按鈕。</strong>
+    </div>
+    <form action="ConfirmPurchase" method="post" name="form1" style="margin: auto;max-width: 860px;">
+        <div class="row-fluid" style="text-align:left;width:850px; font-weight:bold;">
+            <div class="span6" style="margin-bottom:0px;">
+                建置門市/櫃位名稱：@Html.DisplayFor(m => m.shopname)<br />
+                <input type="hidden" name='shopname' value="@Html.DisplayFor(m => m.shopname)" />
+                地址：@Html.DisplayFor(m => m.addr)
+                <input type="hidden" name='addr' value="@Html.DisplayFor(m => m.addr)" />
+            </div>
+            <div class="span6">
+                聯絡人：@Html.DisplayFor(m => m.contactname)<br />
+                <input type="hidden" name='contactname' value="@Html.DisplayFor(m => m.contactname)" />
+                電話：@Html.DisplayFor(m => m.contacttel)
+                <input type="hidden" name='contacttel' value="@Html.DisplayFor(m => m.contacttel)" />
+            </div>
+        </div>
+        <table cellspacing="0" cellpadding="0" id="detail">
+            <tr>
+                <td>
+                    <table style="width:100%" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th width="16.6%" scope="col">設備種類</th>
+                            <th width="16.6%" scope="col">型號/規格</th>
+                            <th width="16.6%" scope="col">費用</th>
+                            <th width="16.6%" scope="col">數量</th>
+                            <th width="16.6%" scope="col">運費</th>
+                            <th width="16.6%" scope="col">小計</th>
+                        </tr>
+                        @{
+                            var i = 0 ;
+                            foreach (OrderDetailModel orderDetailModel in @Model.orderDetail) {
+                                <tr>
+                                    <td align="center">@orderDetailModel.prodType
+                                        <input type="hidden" name='orderDetail[@i].prodType' value="@orderDetailModel.prodType" />
+                                    </td>
+                                    <td align="center">@orderDetailModel.prodName
+                                        <input type="hidden" name='orderDetail[@i].prodName' value="@orderDetailModel.prodName" />
+                                    </td>
+                                    <td align="center">@orderDetailModel.prodPrice
+                                        <input type="hidden" name='orderDetail[@i].prodPrice' value="@orderDetailModel.prodPrice" />
+                                    </td>
+                                    <td align="center">@orderDetailModel.qty
+                                        <input type="hidden" name='orderDetail[@i].qty' value="@orderDetailModel.qty" />
+                                    </td>
+                                    <td align="center">@orderDetailModel.freightRate
+                                        <input type="hidden" name='orderDetail[@i].freightRate' value="@orderDetailModel.freightRate" />
+                                    </td>
+                                    <td align="center">@orderDetailModel.subtotal
+                                        <input type="hidden" name='orderDetail[@i].subtotal' value="@orderDetailModel.subtotal" />
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        }
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td align="right">訂單金額：@Html.DisplayFor(m => m.total)
+                    <input type="hidden" name='total' value="@Html.DisplayFor(m => m.total)" />
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" name='mainProdName' value="@Html.DisplayFor(m => m.mainProdName)" />
+    </form>
+    <span style="color:#f00;">註：本公司提供保固條件提供修復或更換良品之服務，不負擔客戶因此之損害，包含但不限於間接損害及營業損失等。</span>
+    <div id="foot" class="row-fluid" style="padding-bottom:20px;">
+		<div class="span6">
+            <a class="btn foot_btn" onclick="document.form1.submit();">
+                確認購買
+            </a>
+      </div>
+		<div class="span6">
+            <a href="javascript:window.history.back();" class="btn foot_btn">
+            	回上頁
+            </a>
+        </div>
+  </div>
+</div>
+</body>
+</html>
