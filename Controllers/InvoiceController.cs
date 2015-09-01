@@ -21,7 +21,7 @@ namespace SaaSCloud.Controllers
 		}
 
 		public ActionResult P5() {
-			return View();
+			return View();//test
 		}
 
 		[HttpPost]

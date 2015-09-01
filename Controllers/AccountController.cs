@@ -61,7 +61,7 @@ namespace SaaSCloud.Controllers {
 			return View();
 		}
 
-		//
+		// tests
 		// POST: /Account/LogOff
 		[HttpPost]
 		[ValidateAntiForgeryToken]
